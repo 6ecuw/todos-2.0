@@ -56,7 +56,7 @@ ul:empty + .empty-state {
 }
 
 .item + .item {
-  margin-top: 0.55em;
+  margin-top: .55em;
 }
 
 .checkbox {
@@ -64,15 +64,15 @@ ul:empty + .empty-state {
   margin-left: -1.2em;
   margin-top: .25em;
   display: inline-block;
-  width: 0.6em;
-  height: 0.6em;
+  width: .6em;
+  height: .6em;
   border-radius: .05em;
   background-color: white;
-  box-shadow: 0 0 0 .125em #000;
+  box-shadow: 0 0 0 .1em #000;
   cursor: pointer;
 }
 
-.delete__icon {
+.delete-button__icon {
   display: inline-block;
   width: .9em;
   height: .9em;
@@ -92,7 +92,7 @@ ul:empty + .empty-state {
   background-size: 100%;
 }
 
-.item:hover .delete {
+.item:hover .delete-button {
   position: unset;
   height: unset;
   width: unset;
@@ -102,48 +102,42 @@ ul:empty + .empty-state {
   outline: none;
 }
 
-input:focus {
+input:focus,
+.delete-button:focus,
+.new-item__btn:focus {
   outline: none;
-  box-shadow: 0 0 0 0.065em #2a7fff;
+  box-shadow: 0 0 0 .1em #2a7fff;
 }
 
-@media screen and (min-device-width: 1024px) {
-  input:focus,
-  .delete:focus,
-  .new-item__btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.125em #2a7fff;
-  }
+[type="checkbox"]:focus ~ .delete-button,
+.delete-button:focus {
+  position: unset;
+  height: unset;
+  width: unset;
+}
 
-  [type="checkbox"]:focus ~ .delete,
-  .delete:focus {
-    position: unset;
-    height: unset;
-    width: unset;
-  }
-
-  .item__input:focus + .item__label .checkbox {
-    box-shadow:
-        0 0 0 .125em #000,
-        0 0 0 .25em #2A7FFF;
-  }
+.item__input:focus + .item__label .checkbox {
+  box-shadow:
+      0 0 0 .1em #000,
+      0 0 0 .2em #2A7FFF;
 }
 
 [type="checkbox"]:checked + .item__label .item__text {
   text-decoration: line-through;
 }
 
-.delete {
+.delete-button {
   margin: 0;
   line-height: 0;
   border: 0;
 }
 
-.item .delete {
+.item .delete-button {
   border: 0;
   padding: 0;
   background: 0;
-  margin-right: 0.25em;
+  margin-right: .25em;
+  border-radius: .05em;
 }
 
 form {
@@ -156,25 +150,25 @@ form {
 }
 
 input, [type="submit"] {
-  border: 0.125em solid;
-  border-radius: 0.125em;
+  border: .1em solid;
+  border-radius: .1em;
   line-height: 1;
 }
 
 [type="text"] {
-  margin-right: 0.25em;
+  margin-right: .25em;
   width: 100%;
 }
 
 [type="submit"] {
   background: #000;
   color: #fff;
-  padding: 0.25em 0.5em;
+  padding: .25em .5em;
   border: 2px solid #000;
 }
 
 [type="submit"][disabled] {
-  opacity: 0.33;
+  opacity: .33;
 }
 
 .new-item__input::placeholder {
