@@ -13,12 +13,7 @@
 <body>
   <section id="app" aria-labelledby="todos-label">
     <h1 id="todos-label" tabindex="-1">Мой список дел</h1>
-    <div class="new-item">
-      <span class="new-item__input" role="textbox" contenteditable="true" aria-multiline="true" aria-required="true"
-        aria-labelledby="txtbox-label" aria-label="Добавить новый пункт"></span>
-      <div class="new-item__label" id="txtbox-label">Новый пункт</div>
-      <button class="new-item__btn btn" type="button">Добавить</button>
-    </div>
+    <input class="new-item" type="text" aria-label="Добавить новую задачу" placeholder="Новая задача" autofocus>
     <section class="active-list"></section>
     <section class="completed-list"></section>
     <div class="visible-hidden" role="status" aria-live="polite"></div>

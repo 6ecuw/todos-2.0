@@ -1,18 +1,20 @@
 import { Collection } from 'backbone'
-import itemModel from '../models/ItemModel'
-import { LocalStorage } from 'backbone-localstorage'
+import ItemModel from '../models/ItemModel'
+import { LocalStorage } from 'backbone.localstorage'
 
-export default class ItemsCollection extends Collection {
+class ItemsCollection extends Collection {
 
-    get model() { return itemModel }
-    get localStorage() { return new LocalStorage('todos') }
-    get comparator() { return 'order' }
+  get model() { return ItemModel }
+  get localStorage() { return new LocalStorage('todos') }
+  get comparator() { return 'order' }
 
-    initialize() { }
+  initialize() { }
 
-    completed() { return this.where({ completed: true }) }
-    active() { return this.where({ completed: false }) }
+  completed() { return this.where({ completed: true }) }
+  active() { return this.where({ completed: false }) }
 
-    order() { return this.length ? this.last().get('order') + 1 : 1 }
+  order() { return this.length ? this.last().get('order') + 1 : 1 }
 
 }
+
+export default new ItemsCollection()

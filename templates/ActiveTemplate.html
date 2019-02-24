@@ -1,0 +1,11 @@
+<header>
+  <h2>Активные: <%- active %></h2>
+  <button class="active-list__btn btn" type="button" <%= active ? '' : 'disabled' %>>Выбрать все</button>
+</header>
+<ul class="active-list__items" aria-label="Активные: <%- active %>"></ul>
+<% if (!active) { %>
+<div class="empty-state">
+  Либо вы уже выполнили все задачи, либо ещё есть что
+  добавить в ваш список. Добавьте первый пункт.
+</div>
+<% } %>

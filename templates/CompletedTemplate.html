@@ -1,0 +1,7 @@
+<% if (completed) { %>
+<header>
+    <h2>Завершённые: <%- completed %></h2>
+    <button class="completed-list__btn btn" type="button" <%= completed ? '' : 'disabled' %>>Очистить</button>
+</header>
+<ul class="completed-list__items" aria-label="Завершённые: <%- completed %>"></ul>
+<% } %>

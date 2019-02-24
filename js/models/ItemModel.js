@@ -1,19 +1,19 @@
 import { Model } from 'backbone'
 
 export default class ItemModel extends Model {
-    
-    get defaults() {
-        return {
-            title: '',
-            completed: false
-        }
-    }
 
-    initialize() {
-        console.log(`Item created! Title: ${this.get('title')}`)
+  get defaults() {
+    return {
+      title: '',
+      completed: false
     }
+  }
 
-    toggleCompleted() {
-        this.save({ completed: !this.get('completed') })
-    }
+  initialize() {
+    console.log(`Item Init! Title: ${this.get('title')}`)
+  }
+
+  toggle() {
+    this.save({ completed: !this.get('completed') })
+  }
 }

@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
@@ -19,17 +20,20 @@ module.exports = {
           { loader: 'css-loader' },
           {
             loader: 'postcss-loader',
-            options: { plugins: () => [autoprefixer()], },
+            options: { plugins: () => [autoprefixer(), precss()], },
           }
         ],
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['env'],
-          plugins: ['transform-object-assign']
-        },
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: 'env',
+            plugins: 'transform-object-assign'
+          }
+        }
       },
       {
         test: /\.html$/,
@@ -42,7 +46,8 @@ module.exports = {
       {
         host: 'localhost',
         port: 3000,
-        proxy: 'http://localhost:8080/'
+        proxy: 'http://localhost:8080/',
+        open: false
       },
       { reload: false }
     )

@@ -1,8 +1,6 @@
-<input class="item__input visible-hidden" type="checkbox" id="todo-1">
-<label class="item__label" for="todo-1">
-    <span class="checkbox"></span>
-    <span class="item__text">Первый geyn</span>
-</label>
-<button class="delete-button visible-hidden" aria-label="Удалить Первый">
-    <span class="delete-button__icon"></span>
+<input class="item__input visible-hidden" type="checkbox" <%= completed ? 'checked' : '' %>>
+<span class="item__box"></span>
+<label class="item__label" contenteditable="true" role="textbox" aria-multiline="true"><%- title %></label>
+<button class="item__delete s-btn" type="button" aria-label="Удалить <%- title %>">
+  <span class="item__delete icon"></span>
 </button>
