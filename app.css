@@ -22,7 +22,7 @@ body {
   }
 }
 
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -158,6 +158,7 @@ ul:empty~.empty-state {
   width: 1em;
 }
 
+.new-item__input:focus,
 [tabindex="-1"]:focus {
   outline: none;
 }

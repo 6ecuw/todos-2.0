@@ -10,8 +10,8 @@ class ItemsCollection extends Collection {
 
   initialize() { }
 
-  completed() { return this.where({ completed: true }) }
-  active() { return this.where({ completed: false }) }
+  done() { return this.where({ done: true }) }
+  active() { return this.where({ done: false }) }
 
   order() { return this.length ? this.last().get('order') + 1 : 1 }
 

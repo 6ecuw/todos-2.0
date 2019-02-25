@@ -1,0 +1,7 @@
+<% if (done) { %>
+<div class="header">
+    <h2 id="todos-done-list">Завершённые: <%- done %></h2>
+    <button class="done-list__btn btn" type="button" <%= done ? '' : 'disabled' %>>Очистить</button>
+</div>
+<ul class="done-list__items" aria-label="Завершённые: <%- done %>"></ul>
+<% } %>

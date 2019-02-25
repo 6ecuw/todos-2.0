@@ -5,7 +5,7 @@ export default class ItemModel extends Model {
   get defaults() {
     return {
       title: '',
-      completed: false
+      done: false
     }
   }
 
@@ -14,6 +14,6 @@ export default class ItemModel extends Model {
   }
 
   toggle() {
-    this.save({ completed: !this.get('completed') })
+    this.save({ done: !this.get('done') })
   }
 }

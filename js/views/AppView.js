@@ -2,21 +2,21 @@ import _ from 'underscore'
 import { View } from 'backbone'
 import Items from '../collections/ItemsCollection'
 import ItemView from './ItemView'
-import CompletedTemplate from '../../templates/CompletedTemplate.html'
+import DoneTemplate from '../../templates/DoneTemplate.html'
 import ActiveTemplate from '../../templates/ActiveTemplate.html'
 
 export default class AppView extends View {
 
   get el() { return '#app' }
-  get completedTemplate() { return _.template(CompletedTemplate) }
+  get doneTemplate() { return _.template(DoneTemplate) }
   get activeTemplate() { return _.template(ActiveTemplate) }
 
   get events() {
     return {
-      'keypress .new-item': 'createOnEnter',
-      'click .new-item__btn': 'createOnEnter',
-      'click .active-list__btn': 'makeAllComplete',
-      'click .completed-list__btn': 'deleteAllCompleted'
+      'keypress .new-item': 'create',
+      'click .new-item__btn': 'create',
+      'click .active-list__btn': 'makeAllDone',
+      'click .done-list__btn': 'deleteAllDone'
     }
   }
 
@@ -31,17 +31,23 @@ export default class AppView extends View {
     this.listenTo(Items, 'add', this.add)
     this.listenTo(Items, 'remove', this.remove)
     this.listenTo(Items, 'sort', this.sort)
-    this.listenTo(Items, 'change:completed', this.change)
+    this.listenTo(Items, 'change:done', this.change)
 
   }
 
-  add() {
+  add(item) {
     console.log('Event add');
+    console.log(item);
+    
+    this.feedback(item.attributes.title, 'Добавлено')
     this.render()
   }
-
-  remove() {
+  
+  remove(item) {
     console.log('Event remove');
+    console.log(item);
+
+    this.feedback(item.attributes.title, 'Удалено')
     this.render()
   }
 
@@ -55,7 +61,7 @@ export default class AppView extends View {
     this.render()
   }
 
-  render(event) {
+  render() {
     console.log(`App render start!`);
 
     this.applyTemplate()
@@ -66,25 +72,25 @@ export default class AppView extends View {
   applyTemplate() {
     console.log(`ApplyTemplate!`);
 
-    this.completed = Items.completed().length
+    this.done = Items.done().length
     this.active = Items.active().length
 
-    console.log(this.active, this.completed);
+    console.log(this.active, this.done);
 
     this.$sectionActive = this.$('.active-list')
-    this.$sectionCompleted = this.$('.completed-list')
+    this.$sectionDone = this.$('.done-list')
 
     this.$sectionActive.html(this.activeTemplate({ active: this.active }))
-    this.$sectionCompleted.html(this.completedTemplate({ completed: this.completed }))
+    this.$sectionDone.html(this.doneTemplate({ done: this.done }))
 
     this.$listActive = this.$('.active-list__items')
-    this.$listCompleted = this.$('.completed-list__items')
+    this.$listDone = this.$('.done-list__items')
     this.$input = this.$('.new-item__input')
 
     this.addAll()
   }
 
-  createOnEnter(e) {   
+  create(e) {
     if (e.which === 13 || e.type === 'click') {
       e.preventDefault()
 
@@ -102,18 +108,18 @@ export default class AppView extends View {
   }
 
   addOne(todo) {
-    console.log(`addOne! Title: ${todo.get('title')}, Done: ${todo.get('completed')}`);
+    console.log(`addOne! Title: ${todo.get('title')}, Done: ${todo.get('done')}`);
 
     let view = new ItemView({ model: todo })
     let item = view.render().el
     console.log(item);
 
-    if (todo.get('completed')) {
-      console.log(this.$listCompleted[0]);
+    if (todo.get('done')) {
+      console.log(this.$listDone[0]);
 
-      this.$listCompleted.append(item)
+      this.$listDone.append(item)
 
-      console.log(`ListCompleted children length: ${this.$listCompleted.children().length}
+      console.log(`ListDone children length: ${this.$listDone.children().length}
             ------------------------------------------------------------------------------------`);
     } else {
       console.log(this.$listActive[0]);
@@ -130,15 +136,21 @@ export default class AppView extends View {
         ------------------------------------------------------------------------------------`);
 
     this.$listActive.html('')
-    this.$listCompleted.html('')
+    this.$listDone.html('')
     Items.each(this.addOne, this)
   }
 
-  makeAllComplete() {
+  makeAllDone() {
     _.invoke(Items.active(), 'toggle')
   }
-  
-  deleteAllCompleted() {
-    _.invoke(Items.completed(), 'destroy')
+
+  deleteAllDone() {
+    _.invoke(Items.done(), 'destroy')
+    this.feedback('все выполненные пункты', 'Удалены')
+  }
+
+  feedback(title, status) {
+    let liveRegion = document.querySelector('[role="status"]');
+    liveRegion.textContent = `${status} ${title}`;
   }
 }

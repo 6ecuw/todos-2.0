@@ -11,11 +11,11 @@ export default class ItemView extends View {
   get events() {
     return {
       'focus .item__label': 'edit',
-      'click .item__box': 'toggleCompleted',
+      'click .item__box': 'toggleDone',
       'click button.item__delete': 'clear',
       'blur .item__label': 'close',
       'keypress .item__label': 'updateOnEnter',
-      'keydown .item__label': 'CancelOnEscape'
+      'keydown .item__label': 'cancelOnEscape'
     }
   }
 
@@ -29,7 +29,7 @@ export default class ItemView extends View {
     console.log('Item render start!');
 
     this.$el.html(this.template(this.model.toJSON()))
-    this.$el.toggleClass('completed', this.model.get('completed'))
+    this.$el.toggleClass('done', this.model.get('done'))
     this.$input = this.$('.item__label')
 
     console.log(`End Item render
@@ -44,7 +44,7 @@ export default class ItemView extends View {
     this.$el.addClass('editing')
   }
 
-  toggleCompleted() {
+  toggleDone() {
     console.log('Toggle!');
 
     this.model.toggle()
@@ -54,6 +54,7 @@ export default class ItemView extends View {
     console.log('Clear!');
 
     this.model.destroy()
+    document.querySelector('[tabindex="-1"]').focus()
   }
 
   close() {
@@ -65,6 +66,7 @@ export default class ItemView extends View {
       this.model.save({
         title: text
       })
+      document.querySelector('[tabindex="-1"]').focus()
     } else {
       this.clear()
     }
@@ -80,7 +82,7 @@ export default class ItemView extends View {
     }
   }
 
-  CancelOnEscape(e) {
+  cancelOnEscape(e) {
     if (e.which === 27) {
       console.log('Escape');
       this.$input.text(this.model.get('title'))

@@ -1,7 +1,7 @@
-<header>
-  <h2>Активные: <%- active %></h2>
+<div class="header">
+  <h2 id="todos-active-list">Активные: <%- active %></h2>
   <button class="active-list__btn btn" type="button" <%= active ? '' : 'disabled' %>>Выбрать все</button>
-</header>
+</div>
 <ul class="active-list__items" aria-label="Активные: <%- active %>"></ul>
 <% if (!active) { %>
 <div class="empty-state">
