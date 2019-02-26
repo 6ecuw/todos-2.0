@@ -1,9 +1,7 @@
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  entry: ['./app.css', './app.js'],
+  entry: ['./css/app.css', './js/app.js'],
   output: {
     filename: 'bundle.js',
   },
@@ -18,10 +16,7 @@ module.exports = {
           },
           { loader: 'extract-loader' },
           { loader: 'css-loader' },
-          {
-            loader: 'postcss-loader',
-            options: { plugins: () => [autoprefixer(), precss()], },
-          }
+          { loader: 'postcss-loader' }
         ],
       },
       {

@@ -1,4 +1,4 @@
-import AppView from "./js/views/AppView"
+import AppView from "./views/AppView"
 
 window.onload = () => new AppView()
 

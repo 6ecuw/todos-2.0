@@ -66,7 +66,6 @@ export default class ItemView extends View {
       this.model.save({
         title: text
       })
-      document.querySelector('[tabindex="-1"]').focus()
     } else {
       this.clear()
     }
