@@ -1,0 +1,70 @@
+* {
+  font-size: inherit;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(1em + 1vw);
+  font-family: sans-serif;
+
+  @media (pointer:coarse) and (max-aspect-ratio: 3/2) and (width < 768px) {
+    font-size: calc(1.1em + 1vw);
+  }
+}
+
+body {
+  max-width: 24em;
+  margin: 0 auto;
+  padding: 0 .5em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 1.2em;
+}
+
+@media (pointer:coarse) and (max-aspect-ratio: 3/2) and (width < 768px) {
+  h1 {
+    margin: .4em 0;
+  }
+
+  h2 {
+    margin: .6em 0;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  padding-bottom: 5em;
+}
+
+.empty-state,
+ul:empty {
+  display: none;
+}
+
+ul:empty~.empty-state {
+  display: block;
+  font-size: .9em;
+}
+
+.visible-hidden {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}

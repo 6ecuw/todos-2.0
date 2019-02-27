@@ -20,20 +20,20 @@ export default class ItemView extends View {
   }
 
   initialize() {
-    console.log('ItemView Init!');
+    // console.log('ItemView Init!');
 
     this.listenTo(this.model, 'destroy', this.remove)
   }
 
   render() {
-    console.log('Item render start!');
+    // console.log('Item render start!');
 
     this.$el.html(this.template(this.model.toJSON()))
     this.$el.toggleClass('done', this.model.get('done'))
     this.$input = this.$('.item__label')
 
-    console.log(`End Item render
-    ------------------------------------------------------------------------------------`);
+    // console.log(`End Item render
+    // ------------------------------------------------------------------------------------`);
 
     return this
   }
@@ -57,15 +57,22 @@ export default class ItemView extends View {
     document.querySelector('[tabindex="-1"]').focus()
   }
 
+  save(text) {
+    console.log('Save!');
+
+    this.model.save({ title: text })
+    document.querySelector('[tabindex="-1"]').focus()
+  }
+
   close() {
     console.log('Close!');
 
     let text = this.$input.text().trim()
 
+    if (text === this.model.get('title')) return
+
     if (text) {
-      this.model.save({
-        title: text
-      })
+      this.save(text)
     } else {
       this.clear()
     }

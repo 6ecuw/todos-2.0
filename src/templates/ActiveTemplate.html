@@ -1,6 +1,6 @@
 <div class="header">
   <h2 id="todos-active-list">Активные: <%- active %></h2>
-  <button class="active-list__btn btn" type="button" <%= active ? '' : 'disabled' %>>Выбрать все</button>
+  <button class="active-list__btn btn btn--outlined" type="button" <%= active ? '' : 'disabled' %>>Выбрать все</button>
 </div>
 <ul class="active-list__items" aria-label="Активные: <%- active %>"></ul>
 <% if (!active) { %>

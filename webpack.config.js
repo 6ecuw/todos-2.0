@@ -1,7 +1,8 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
-  entry: ['./css/app.css', './js/app.js'],
+  entry: ['./src/css/app.css', './src/js/app.js'],
   output: {
     filename: 'bundle.js',
   },
@@ -45,6 +46,7 @@ module.exports = {
         open: false
       },
       { reload: false }
-    )
+    ),
+    new HtmlWebpackPlugin({ template: './src/index.html' })
   ]
 };

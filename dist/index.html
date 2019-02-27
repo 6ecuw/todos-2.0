@@ -13,13 +13,17 @@
 <body>
   <section id="app" aria-labelledby="todos-label">
     <h1 id="todos-label" tabindex="-1">Мой список дел</h1>
-    <input class="new-item" type="text" aria-label="Добавить новую задачу" placeholder="Новая задача" autofocus>
-    <section class="active-list"></section>
-    <section class="completed-list"></section>
+    <header class="new-item">
+      <span class="new-item__input" role="textbox" contenteditable="true" aria-multiline="true" aria-labelledby="txtbox-label" aria-label="Добавить новый пункт"></span>
+      <div class="new-item__label" id="txtbox-label">Новый пункт</div>
+      <button class="new-item__btn btn" type="button">Добавить</button>
+    </header>
+    <main class="lists">
+      <section class="active-list" aria-labelledby="todos-active-list"></section>
+      <section class="done-list" aria-labelledby="todos-done-list"></section>
+    </main>
     <div class="visible-hidden" role="status" aria-live="polite"></div>
   </section>
-
-  <script src="bundle.js" async></script>
-</body>
+<script type="text/javascript" src="bundle.js"></script></body>
 
 </html>

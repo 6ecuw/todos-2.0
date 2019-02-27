@@ -1,0 +1,45 @@
+.btn {
+  background: #000000;
+  color: #ffffff;
+  padding: .3em .6em;
+  border: .125em solid #000;
+  cursor: pointer;
+  font-size: .8em;
+  border-radius: .2em;
+}
+
+.btn[disabled] {
+  opacity: 0.50;
+  cursor: auto;
+}
+
+.btn--outlined {
+  background-color: #fff;
+  color: #000;
+}
+
+.btn--outlined:not([disabled]):hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.s-btn {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: 0;
+  border-radius: .05em;
+  font-size: 1.3em;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: white;
+  background-position: center;
+  background-size: 100%;
+  cursor: pointer;
+}

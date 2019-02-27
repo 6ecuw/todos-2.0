@@ -37,7 +37,6 @@ export default class AppView extends View {
 
   add(item) {
     console.log('Event add');
-    console.log(item);
     
     this.feedback(item.attributes.title, 'Добавлено')
     this.render()
@@ -45,7 +44,6 @@ export default class AppView extends View {
   
   remove(item) {
     console.log('Event remove');
-    console.log(item);
 
     this.feedback(item.attributes.title, 'Удалено')
     this.render()
@@ -62,7 +60,7 @@ export default class AppView extends View {
   }
 
   render() {
-    console.log(`App render start!`);
+    // console.log(`App render start!`);
 
     this.applyTemplate()
 
@@ -70,18 +68,15 @@ export default class AppView extends View {
   }
 
   applyTemplate() {
-    console.log(`ApplyTemplate!`);
+    // console.log(`ApplyTemplate!`);
 
     this.done = Items.done().length
     this.active = Items.active().length
 
-    console.log(this.active, this.done);
+    // console.log(this.active, this.done);
 
-    this.$sectionActive = this.$('.active-list')
-    this.$sectionDone = this.$('.done-list')
-
-    this.$sectionActive.html(this.activeTemplate({ active: this.active }))
-    this.$sectionDone.html(this.doneTemplate({ done: this.done }))
+    this.$('.active-list').html(this.activeTemplate({ active: this.active }))
+    this.$('.done-list').html(this.doneTemplate({ done: this.done }))
 
     this.$listActive = this.$('.active-list__items')
     this.$listDone = this.$('.done-list__items')
@@ -103,7 +98,7 @@ export default class AppView extends View {
         });
       }
 
-      this.$input.text('')
+      this.$input.text('').focus()
     }
   }
 
@@ -112,28 +107,28 @@ export default class AppView extends View {
 
     let view = new ItemView({ model: todo })
     let item = view.render().el
-    console.log(item);
+    // console.log(item);
 
     if (todo.get('done')) {
-      console.log(this.$listDone[0]);
+      // console.log(this.$listDone[0]);
 
       this.$listDone.append(item)
 
-      console.log(`ListDone children length: ${this.$listDone.children().length}
-            ------------------------------------------------------------------------------------`);
+      // console.log(`ListDone children length: ${this.$listDone.children().length}
+            // ------------------------------------------------------------------------------------`);
     } else {
-      console.log(this.$listActive[0]);
+      // console.log(this.$listActive[0]);
 
       this.$listActive.append(item)
 
-      console.log(`ListActive children length: ${this.$listActive.children().length}
-            ------------------------------------------------------------------------------------`);
+      // console.log(`ListActive children length: ${this.$listActive.children().length}
+            // ------------------------------------------------------------------------------------`);
     }
   }
 
   addAll() {
-    console.log(`addAll! Items length: ${Items.length}
-        ------------------------------------------------------------------------------------`);
+    // console.log(`addAll! Items length: ${Items.length}
+        // ------------------------------------------------------------------------------------`);
 
     this.$listActive.html('')
     this.$listDone.html('')

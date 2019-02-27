@@ -1,0 +1,19 @@
+.s-btn:focus,
+.item:hover .s-btn,
+.item__label:focus + .s-btn {
+  height: 1em;
+  width: 1em;
+}
+
+.new-item__input:focus,
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.btn:focus,
+.item__input:focus + .item__box,
+.item__label:focus,
+.s-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 .1em #2A7FFF;
+}
