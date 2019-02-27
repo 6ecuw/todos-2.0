@@ -99,6 +99,11 @@ export default class AppView extends View {
       }
 
       this.$input.text('').focus()
+
+      if (getComputedStyle(document.querySelector('.new-item')).position === 'fixed') {
+        document.body.scrollIntoView(false)
+      }
+      
     }
   }
 

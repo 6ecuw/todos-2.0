@@ -31,6 +31,7 @@ export default class ItemView extends View {
     this.$el.html(this.template(this.model.toJSON()))
     this.$el.toggleClass('done', this.model.get('done'))
     this.$input = this.$('.item__label')
+    this.newItem = document.querySelector('.new-item')
 
     // console.log(`End Item render
     // ------------------------------------------------------------------------------------`);
@@ -38,11 +39,6 @@ export default class ItemView extends View {
     return this
   }
 
-  edit() {
-    console.log('Edit!');
-
-    this.$el.addClass('editing')
-  }
 
   toggleDone() {
     console.log('Toggle!');
@@ -50,22 +46,38 @@ export default class ItemView extends View {
     this.model.toggle()
   }
 
+  toggleNewItem(stat) {
+    if (getComputedStyle(this.newItem).position === 'fixed') {
+      this.newItem.classList.toggle('visible-hidden', stat)
+    }
+  }
+
+  edit() {
+    console.log('Edit!');
+
+    this.$el.addClass('editing')
+    this.toggleNewItem(true)
+  }
+
   clear() {
     console.log('Clear!');
 
-    this.model.destroy()
     document.querySelector('[tabindex="-1"]').focus()
+    this.model.destroy()
   }
 
   save(text) {
     console.log('Save!');
 
     this.model.save({ title: text })
-    document.querySelector('[tabindex="-1"]').focus()
   }
 
   close() {
     console.log('Close!');
+
+    this.$el.removeClass('editing')
+
+    this.toggleNewItem(false)
 
     let text = this.$input.text().trim()
 
@@ -77,7 +89,6 @@ export default class ItemView extends View {
       this.clear()
     }
 
-    this.$el.removeClass('editing')
   }
 
   updateOnEnter(e) {
@@ -85,6 +96,7 @@ export default class ItemView extends View {
       console.log('Enter');
       e.preventDefault()
       this.close()
+      document.querySelector('.new-item__input').focus()
     }
   }
 
