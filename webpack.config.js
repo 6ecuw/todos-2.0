@@ -1,21 +1,24 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: ['./src/css/app.css', './src/js/app.js'],
+  entry: [
+    './src/js/app.js',
+    './src/css/app.css'
+  ],
   output: {
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          {
-            loader: 'file-loader',
-            options: { name: 'bundle.css', },
-          },
-          { loader: 'extract-loader' },
+          MiniCssExtractPlugin.loader,
           { loader: 'css-loader' },
           { loader: 'postcss-loader' }
         ],
@@ -47,6 +50,14 @@ module.exports = {
       },
       { reload: false }
     ),
-    new HtmlWebpackPlugin({ template: './src/index.html' })
+    new CleanWebpackPlugin(['dist/*']),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: './src/index.html',
+      filename: 'index.html'
+    })
   ]
 };
